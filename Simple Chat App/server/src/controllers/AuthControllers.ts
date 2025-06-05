@@ -1,6 +1,10 @@
 import { Request , Response } from 'express'
 import User from '../models/User'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 interface CustomRequest extends Request {
   user : {
@@ -8,6 +12,23 @@ interface CustomRequest extends Request {
     email? : string;
   }
 }
+
+const JWT_KEY = process.env.JWT_SECRET_KEY || 'default_secret_key';
+
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+const generateToken = (userId : string , email : string) => {
+   return jwt.sign({
+    email , 
+    userId,
+  } ,
+   JWT_KEY
+   ,
+  {
+    expiresIn : maxAge,
+  }
+ );
+};
+
 
 export const signUp = async (req : Request , res : Response) => {
   
@@ -61,6 +82,18 @@ export const logIn = async (req : Request , res : Response) => {
         message : 'Invalid credentials',
       });
      }
+
+     //  token logic --> 
+
+     const token = generateToken(user._id!.toString() , user.email);
+     
+     res.cookie('jwt' , token , 
+       {
+        maxAge, 
+        secure : true,
+        sameSite : "none",
+       }
+      );
 
      res.status(200).json({
       success : true,
