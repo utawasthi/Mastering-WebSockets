@@ -1,9 +1,9 @@
-import express from 'express'
+import {Router} from 'express'
 import { getUserInfo, logIn, logOut, signUp, updateProfile } from '../controllers/AuthControllers';
 import { verifyToken } from '../middlewares /authMiddlewares';
 
 
-const authRoutes = express.Router();
+const authRoutes = Router();
 
 authRoutes.post('/signUp' , signUp);
 authRoutes.post('/logIn' , logIn);

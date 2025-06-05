@@ -1,17 +1,17 @@
 import { Request , Response } from 'express'
 import User from '../models/User'
 
-const signUp = async (req : Request , res : Response) => {
+export const signUp = async (req : Request , res : Response) => {
    try{
 
    }
-   catch{
-
+   catch(error){
+     
    }
 }
 
 
-const logIn = async (req : Request , res : Response) => {
+export const logIn = async (req : Request , res : Response) => {
    try{
 
    }
@@ -22,7 +22,7 @@ const logIn = async (req : Request , res : Response) => {
    }
 };
 
-const logOut = async (req : Request , res : Response) => {
+export const logOut = async (req : Request , res : Response) => {
   try{
 
   }
@@ -31,7 +31,7 @@ const logOut = async (req : Request , res : Response) => {
   }
 };
 
-const getUserInfo = async (req : Request , res : Response) => {
+export const getUserInfo = async (req : Request , res : Response) => {
   try{
 
   }
@@ -40,7 +40,7 @@ const getUserInfo = async (req : Request , res : Response) => {
   }
 };
 
-const updateProfile = async (req : Request , res : Response) => {
+export const updateProfile = async (req : Request , res : Response) => {
   try{
 
   }
